@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: checkout
+spec:
+  params:
+    - name: repo-url
+      type: string
+    - name: branch
+      type: string
+  steps:
+    - name: checkout
+      image: bitnami/git:latest
+      command: [git]
+      args: ["clone", "--branch", "$(params.branch)", "$(params.repo-url)"]
